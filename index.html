@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="js/pixi.min.js"></script>
+    <script>
+		var app = new PIXI.Application(1280,900);
+        document.body.appendChild(app.view);
+        
+        var bg = new PIXI.Sprite.fromImage("res/bg.png");
+        app.stage.addChild(bg);
+		bg.visible = false;
+        
+		var bg1 = new PIXI.Sprite.fromImage("res/bg1.png");
+		app.stage.addChild(bg1);
+		bg1.scale.x = 1.53;
+		bg1.scale.y = 1.53;
+		
+		var hesuan = new PIXI.Sprite.fromImage("res/hesuan.png");
+		app.stage.addChild(hesuan);
+		hesuan.scale.x = 1.5;
+		hesuan.scale.y = 1.75;
+		hesuan.visible = false;
+		
+		
+		var down = new PIXI.Sprite.fromImage("res/down.png");
+	    app.stage.addChild(down);
+		down.scale.x = 0.12;
+		down.scale.y = 0.12;
+		down.x = 640;
+		down.y = 750;
+		
+		var down2 = new PIXI.Sprite.fromImage("res/down2.png");
+		app.stage.addChild(down2);
+		down2.scale.x = 0.12;
+		down2.scale.y = 0.12;
+		down2.x = 640;
+		down2.y = 750;
+		down2.visible = false;
+	
+		var wenben = new PIXI.Text("");
+		wenben.x = 300;
+		wenben.y = 300;
+		wenben.text = "疫情期间，省外大学生返校须持48小时内阴性核酸证明。";
+		wenben.style.fill = 0xffffff;
+		app.stage.addChild(wenben);
+		wenben.visible = false;
+		
+		var wenben1 = new PIXI.Text("");
+		wenben1.x = 500;
+		wenben1.y = 650;
+		wenben1.text = "点击此处开始核酸检测";
+		wenben1.style.fill = 0xffffff;
+		app.stage.addChild(wenben1);
+		wenben1.visible = false;
+		
+		down.interactive = true;
+		
+		down.on("mouseover",move);
+		function move(){
+			down.y += 5;
+		}
+		
+		down.on("mouseout",move1);
+		function move1(){
+			down.y -= 5;
+		}
+		
+		down.on("click",change);
+		function change() {
+		    bg1.visible = false;
+			bg.visible = true;
+			bg.alpha = 0.5;
+			down.visible = false;
+			wenben.visible = true;
+			wenben1.visible = true;
+		}
+		
+		wenben1.interactive = true;
+		wenben1.on("click",change1);
+		wenben1.on("mouseover",large);
+		
+		function large(){
+			wenben1.scale.x = 1.2;
+			wenben1.scale.y = 1.2;
+			wenben1.x = 480;
+		}
+		
+		wenben1.on("mouseout",small);
+		function small(){
+			wenben1.scale.x = 1;
+			wenben1.scale.y = 1;
+			wenben1.x = 500;
+		}
+		
+		function change1(){
+			bg.visible = false;
+			wenben.visible = false;
+			wenben1.visible = false;
+			hesuan.visible = true;
+			down2.visible = true;
+		}
+		
+		down2.interactive = true;
+		down2.on("click",change2);
+		
+		function change2(){
+			
+		}
+		
+		down2.on("mouseover",move3);
+		function move3(){
+			down2.y += 5;
+		}
+		
+		down2.on("mouseout",move4);
+		function move4(){
+			down2.y -= 5;
+		}
+		
+	</script>
+</body>
+</html>
